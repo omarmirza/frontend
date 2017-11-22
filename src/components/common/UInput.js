@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { TextInput } from 'react-native';
 
-class UInput extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { text: props.default };
-  }
-
-  render() {
+const UInput = (props) => {
     return (
       <TextInput
+        secureTextEntry={props.secureTextEntry || false}
+        onFocus={props.onFocus || null}
         style={styles.inputStyle}
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
+        onChangeText={props.onChangeText}
+        value={props.value}
       />
     );
-  }
-}
+};
 
 const styles = {
   inputStyle: {
@@ -38,4 +32,4 @@ const styles = {
   }
 };
 
-export default UInput;
+export { UInput };
