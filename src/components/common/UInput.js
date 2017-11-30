@@ -4,6 +4,7 @@ import { TextInput } from 'react-native';
 const UInput = (props) => {
     return (
       <TextInput
+        autoCapitalize='none'
         secureTextEntry={props.secureTextEntry || false}
         onFocus={props.onFocus || null}
         style={styles.inputStyle}

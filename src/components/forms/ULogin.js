@@ -1,23 +1,58 @@
 import React, { Component } from 'react';
-import { View, Image, Button} from 'react-native';
+import { Text, View, Image, Button} from 'react-native';
 
-import { UInput, UFocusButton, UPasswordInput } from '../common';
+import { UInput, UFocusButton, UPasswordInput, ErrorText, Spinner } from '../common';
+
+import axios from 'axios';
 
 class ULogin extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {username: 'Username', password: 'Password'}
+    this.state = {username: 'Username', password: 'Password', error: false, isLoading: false}
   }
 
   _doLogin = () => {
-    console.log(this.state);
+    this.setState({isLoading: true});
+    axios.post('http://localhost:8000/user/login', {
+      "username": this.state.username,
+      "password": this.state.password
+    })
+    .catch(function(error){
+      this.setState({error: true, isLoading: false})
+    }.bind(this));
+  }
+
+  _goToRegister = () => {
+    return;
+  }
+
+  _renderError = () => {
+    if(this.state.error) {
+      return <ErrorText>Username or Password incorrect</ErrorText>;
+    }
+    return null;
+  }
+
+  _renderLogin = () => {
+    if(this.state.isLoading) {
+      return (<UFocusButton disabled={true}>
+                <Spinner size={'small'} />
+              </UFocusButton>);
+    }
+
+    return (<UFocusButton callback={this._doLogin}>
+              <Text style={styles.textStyle}>
+                Login
+              </Text>
+            </UFocusButton>);
   }
 
   render() {
     return (
       <View style={styles.defaultStyle}>
-        <Image source={require('../../../resources/logo.png')} style={styles.logoStyle}/>
+        <Image source={require('../../../resources/austinlogo1.png')} style={styles.logoStyle}/>
+        {this._renderError()}
         <UInput
           onFocus={() => this.setState({username: ''})}
           value={this.state.username}
@@ -28,8 +63,11 @@ class ULogin extends Component {
           value={this.state.password}
           onChangeText={text => this.setState({password: text})}
         />
-        <UFocusButton callback={this._doLogin}>
-          Login
+        {this._renderLogin()}
+        <UFocusButton callback={this._goToRegister}>
+          <Text style={styles.textStyle}>
+            Register
+          </Text>
         </UFocusButton>
       </View>
     );
@@ -47,6 +85,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center'
   },
+  textStyle: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+  }
 }
 
 export { ULogin };

@@ -2,12 +2,10 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 const UFocusButton = (props) => {
-  const { callback, children } = props;
+  const { callback, children, disabled } = props;
   return(
-    <TouchableOpacity onPress={callback} style={styles.focusStyle}>
-      <Text style={styles.textStyle}>
-        {children}
-      </Text>
+    <TouchableOpacity onPress={callback} style={styles.focusStyle} disabled={disabled}>
+      {children}
     </TouchableOpacity>
   );
 };
@@ -26,10 +24,6 @@ const styles = {
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.3,
     shadowRadius: 2
-  },
-  textStyle: {
-    color: '#ffffff',
-    fontWeight: 'bold',
   }
 };
 
