@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Button} from 'react-native';
-
+import { Actions } from 'react-native-router-flux';
 import { UInput, UFocusButton, UPasswordInput, ErrorText, Spinner } from '../common';
 
 import axios from 'axios';
@@ -12,19 +12,27 @@ class ULogin extends Component {
     this.state = {username: 'Username', password: 'Password', error: false, isLoading: false}
   }
 
+  _onLoginSuccess() {
+    this.setState({isLoading: false});
+    Actions.select();
+  }
+
+  _onLoginFail() {
+    this.setState({error: true, isLoading: false})
+  }
+
   _doLogin = () => {
     this.setState({isLoading: true});
-    axios.post('http://localhost:8000/user/login', {
+    axios.post('http://10.204.225.209:8000/user/login', {
       "username": this.state.username,
       "password": this.state.password
     })
-    .catch(function(error){
-      this.setState({error: true, isLoading: false})
-    }.bind(this));
+    .then(this._onLoginSuccess.bind(this))
+    .catch(this._onLoginFail.bind(this));
   }
 
-  _goToRegister = () => {
-    return;
+  onRegisterButtonPressed() {
+    Actions.register();
   }
 
   _renderError = () => {
@@ -64,7 +72,7 @@ class ULogin extends Component {
           onChangeText={text => this.setState({password: text})}
         />
         {this._renderLogin()}
-        <UFocusButton callback={this._goToRegister}>
+        <UFocusButton callback={this.onRegisterButtonPressed}>
           <Text style={styles.textStyle}>
             Register
           </Text>
@@ -76,8 +84,9 @@ class ULogin extends Component {
 
 const styles = {
   logoStyle: {
-    height: 150,
-    width: 150
+    height: 300,
+    width: 300,
+    marginBottom: 80
   },
   defaultStyle: {
     backgroundColor: '#ff9e1b',
@@ -88,7 +97,8 @@ const styles = {
   textStyle: {
     color: '#ffffff',
     fontWeight: 'bold',
-  }
+    fontSize: 17
+  },
 }
 
 export { ULogin };

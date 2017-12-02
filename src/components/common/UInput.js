@@ -5,6 +5,7 @@ const UInput = (props) => {
     return (
       <TextInput
         autoCapitalize='none'
+        autoComplete='none'
         secureTextEntry={props.secureTextEntry || false}
         onFocus={props.onFocus || null}
         style={styles.inputStyle}
@@ -16,13 +17,14 @@ const UInput = (props) => {
 
 const styles = {
   inputStyle: {
-    width: 200,
+    width: 300,
     height: 30,
     backgroundColor: '#ffffff',
     marginTop: 5,
     borderColor: '#ddd',
     borderWidth: 1,
-    borderRadius: 2,
+    borderRadius: 15,
+
     fontStyle: 'italic',
     fontWeight: '100',
     color: '#818387',
