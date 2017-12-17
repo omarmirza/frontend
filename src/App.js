@@ -1,11 +1,14 @@
 import React from 'react';
+import { ULogin, URegister } from './components/forms';
+import Router from './Router';
 
-import { ULogin } from './components/forms';
+class App extends React.Component {
 
-const App = () => {
-  return(
-    <ULogin />
-  );
+  render() {
+    return(
+        <Router />
+    );
+  }
 }
 
 export default App;
