@@ -23,7 +23,7 @@ class ULogin extends Component {
 
   _doLogin = () => {
     this.setState({isLoading: true});
-    axios.post('http://10.204.225.209:8000/user/login', {
+    axios.post('http://localhost:8000/user/login', {
       "username": this.state.username,
       "password": this.state.password
     })

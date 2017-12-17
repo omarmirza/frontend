@@ -4,6 +4,7 @@ import { TextInput } from 'react-native';
 const UInput = (props) => {
     return (
       <TextInput
+        {...props}
         autoCapitalize='none'
         autoComplete='none'
         secureTextEntry={props.secureTextEntry || false}

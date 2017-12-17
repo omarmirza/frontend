@@ -25,10 +25,10 @@ class UChooseRole extends React.Component {
           </View>
           <View>
             <UFocusButton callback={this.onJobRoleClick}>
-              <Text>I need a job!</Text>
+              <Text style={styles.textStyle}>I need a job!</Text>
             </UFocusButton>
             <UFocusButton callback={this.onUserRoleClick}>
-              <Text>I want to work!</Text>
+              <Text style={styles.textStyle}>I want to work!</Text>
             </UFocusButton>
           </View>
       </View>
@@ -58,7 +58,12 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  textStyle: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 17
+  },
 };
 
 export { UChooseRole }

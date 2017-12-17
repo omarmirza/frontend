@@ -15,8 +15,13 @@ class UUserInfo extends React.Component {
                   role: this.props.role}
   }
 
-  onNextClick() {
-    Actions.extra(this.state);
+  onNextClick = () => {
+    Actions.extra({username: this.state.username,
+                  password: this.state.password,
+                  first: this.state.first,
+                  last: this.state.last,
+                  email: this.state.email,
+                  role: this.state.role});
   }
 
   render() {
@@ -54,7 +59,7 @@ class UUserInfo extends React.Component {
           onChangeText={text => this.setState({conf_password: text})}
         />
         <UFocusButton callback={this.onNextClick}>
-          <Text>Next</Text>
+          <Text style={styles.textStyle}>Next</Text>
         </UFocusButton>
       </View>
     );
@@ -68,7 +73,12 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  textStyle: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 17
+  },
 }
 
 export { UUserInfo };
