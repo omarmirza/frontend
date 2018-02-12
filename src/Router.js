@@ -1,11 +1,17 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import { ULogin, USelect, UChooseRole, UUserInfo, UExtraInfo } from './components/forms';
+import { ULogin, USelect, UChooseRole, UUserInfo, UExtraInfo, UCreateAcc } from './components/forms';
 
 const RouterComponent = () => {
   return (
     <Router>
       <Scene key="root">
+        <Scene
+          hideNavBar
+          key="createacc"
+          component={UCreateAcc}
+          title="Create Account"
+        />
         <Scene
           hideNavBar={true}
           key="login"

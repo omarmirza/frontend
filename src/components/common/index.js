@@ -4,3 +4,4 @@ export * from './UPasswordInput';
 export * from './ErrorText';
 export * from './Spinner';
 export * from './UMultiInput';
+export * from './Section';

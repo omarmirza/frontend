@@ -5,7 +5,7 @@ import Router from './Router';
 class App extends React.Component {
 
   render() {
-    return(
+    return (
         <Router />
     );
   }
